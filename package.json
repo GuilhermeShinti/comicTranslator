@@ -1,0 +1,8 @@
+{
+  "name": "comicTranslator",
+  "version": "1.0.0",
+  "description": "Translate comics and mangas using AI.",
+  "main": "index.js",
+  "author": "Guilherme Shinti <guilhermeshinti@gmail.com>",
+  "license": "MIT"
+}
