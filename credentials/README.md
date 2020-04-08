@@ -19,3 +19,16 @@ File: `google.json`
 }
 
 ```
+
+## IBM
+
+File: `ibm-watson.json`
+
+```
+{
+	"version": "2018-05-01",
+	"apikey": "...",
+	"url": "..."
+}
+
+```

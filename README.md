@@ -1,6 +1,6 @@
 # ComicTranslator
 
-Translate comics and mangas pages using AI.
+Extract and Translate texts of comics and mangas pages using AI.
 
 Compatibles formats: '.jpeg', '.jpg', '.png'.
 For add more formats to test just, increase in acceptedExtension on the file 'robots/input.js'
@@ -32,3 +32,5 @@ Run
 ```
 yarn start
 ```
+
+After run is generated 'content.json' inside manga or comic folder with original and translated texts, position and more info.

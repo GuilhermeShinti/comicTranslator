@@ -14,7 +14,10 @@ async function translateText(content) {
       for (let textIndex = 0; textIndex < texts.length; textIndex++) {
         const [translation] = await translate.translate(
           texts[textIndex].original,
-          content.targetLanguage
+          {
+            from: content.sourceLanguage,
+            to: content.targetLanguage
+          }
         );
         texts[textIndex].translated = translation;
       }
@@ -25,6 +28,31 @@ async function translateText(content) {
   console.log("[Translate] Finished.");
 }
 
+async function detectLanguage(content) {
+  const texts = content.files[0].texts.map(text => text.original);
+  let [detections] = await translate.detect(texts);
+  const detectedLanguages = detections.map(detected => detected.language);
+  const reduceLanguages = detectedLanguages.reduce(function(prev, cur) {
+    prev[cur] = (prev[cur] || 0) + 1;
+    return prev;
+  }, {});
+
+  const languagesArray = Object.entries(reduceLanguages);
+  const languages = languagesArray.map(a => a[0]);
+  const numberOf = languagesArray.map(a => a[1]);
+
+  const maxNumber = getMaxOfArray(numberOf);
+  const index = numberOf.findIndex(i => i === maxNumber);
+
+  console.log("Detected Language:", languages[index]);
+  content.sourceLanguage = languages[index];
+}
+
+function getMaxOfArray(numArray) {
+  return Math.max.apply(null, numArray);
+}
+
 module.exports = {
-  translateText
+  translateText,
+  detectLanguage
 };

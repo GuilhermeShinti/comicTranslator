@@ -1,6 +1,5 @@
 const state = require("./state.js");
-const { extractTexts } = require("./google/vision.js");
-const { translateText } = require("./google/translate.js");
+const { extractTexts, detectLanguage, translate } = require("./ai.js");
 
 async function robot(folderName) {
   const content = state.load(folderName);
@@ -9,8 +8,9 @@ async function robot(folderName) {
   await extractTexts(content);
   state.save(folderName, content);
 
-  // TODO: Select text translation API
-  await translateText(content);
+  await detectLanguage(content);
+
+  await translate[content.translate_ai](content);
   state.save(folderName, content);
 }
 

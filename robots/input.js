@@ -3,6 +3,7 @@ const path = require("path");
 const readline = require("readline-sync");
 
 const state = require("./state.js");
+const { availableTranslateAI } = require("./ai.js");
 
 const contentPath = path.join(__dirname, "..", "content");
 const acceptedExtension = [".jpeg", ".jpg", ".png"];
@@ -16,6 +17,8 @@ function robot() {
 
   content.folderName = folderName;
   content.path = contentPath;
+  content.translate_ai = askForAItoUse();
+  content.sourceLanguage = "";
   content.targetLanguage = askForTargetLanguage();
   content.files = images.map(img => {
     return { name: img, width: 0, height: 0, texts: [] };
@@ -87,6 +90,20 @@ function askForTargetLanguage() {
   }
 
   return languageCode;
+}
+
+function askForAItoUse() {
+  const selectedPrefixIndex = readline.keyInSelect(
+    availableTranslateAI,
+    "Choose translation AI: "
+  );
+
+  if (selectedPrefixIndex === -1) {
+    console.log("Exit...");
+    process.exit();
+  }
+
+  return selectedPrefixIndex;
 }
 
 module.exports = robot;
