@@ -3,6 +3,15 @@
   "version": "1.0.0",
   "description": "Translate comics and mangas using AI.",
   "main": "index.js",
+  "scripts": {
+    "start": "node ."
+  },
   "author": "Guilherme Shinti <guilhermeshinti@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@google-cloud/translate": "^5.3.0",
+    "@google-cloud/vision": "^1.11.0",
+    "dotenv": "^8.2.0",
+    "readline-sync": "^1.4.10"
+  }
 }
